@@ -1,0 +1,210 @@
+    body {
+        margin:0%;
+        height: 100vh;
+    }
+    #background{
+        position: fixed; 
+        width: 100%; 
+        height: 100%;
+        z-index: 0;
+    }
+    #postboxlid{
+        position: absolute; 
+        z-index: 2; 
+        width: 100vw; 
+        height: 58.325vh;
+    }
+    #postbox{
+        position: absolute; 
+        z-index: 1; 
+        width: 100vw; 
+        height: 75vh; 
+        margin-top: 25vh;
+        display: none;
+    }
+    #panel{
+        width: 50%;
+        height: 94vh;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    #titlebox{
+        padding-left: 10vmin;
+        padding-right: 10vmin;
+        padding-top: 23vmin;
+        width: 40vw;
+        height: 25vh;
+    }
+    #message{
+        transform: rotate(70deg);
+        position: absolute;
+        left: 16vw; 
+        top: 65vh; 
+        width: 40vw;
+        height: 65vh;
+        z-index: 1;
+        animation: send 4s forwards;
+    }
+    @keyframes send{
+        25%{
+            transform: translate(-0vw, -0vh) rotate(70deg);
+        }
+        100%{
+            transform: translate(-12vw, -80vh) rotate(70deg);
+        }
+    }
+    #title{
+        position: relative; 
+        z-index: 3; 
+        width: 35vw; 
+        height: 20vh;
+        left: 3vw;
+    }
+    #subtitle{
+        position: relative;
+        z-index: 3; 
+        width: 15vw; 
+        height: 3vw;
+        left: 12vw;
+    }
+    .navbar {
+        overflow: hidden;
+        background: linear-gradient(180deg, rgb(240, 240, 240)90%, rgba(255,255,255,0) 100%);;
+        position: sticky;
+        top: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+        z-index: 3;
+    }
+    .navbar a {
+        float: right;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 1.5vh;
+        padding-left: 1.3vw;
+        padding-right: 1.3vw;
+        text-decoration: none;
+    }
+    .borderLR {
+        width: 0.05vw;
+        height: 2.5vh;
+        background-color: gray;
+    }
+    .logonav {
+        position: absolute;
+        height: 3.8vh;
+        left: 1vw;
+        top: 0.8vh;
+    }
+
+    /* -----------------underLine animation--------------------- */
+    .underline {
+      position: relative;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .underline:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 0.175em;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+      opacity: .4;
+      transform-origin: bottom center;
+      transition: transform 0.25s ease-out;
+    }
+
+    .underline:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom center;
+    }
+    @media (max-width:480px){
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .logonav{
+            position: absolute;
+            height: 6vh;
+            width: auto;
+            left: 1vw;
+            top: 10%;
+            content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บโทรศัพท์_สีดำ.png");
+        }
+        #background{
+            position: absolute; 
+            z-index: 0; 
+            width: 100vw; 
+            height: 93.25vh;
+            content: url("./ITIJAI-Photo/Sendpostcard/BG_Mobile-01.png");
+        }
+        #cover{
+            position: absolute; 
+            z-index: 2; 
+            width: 100vw; 
+            height: 25vh; 
+            top: 0.3125vh;
+        }
+        #postbox{
+            display: block;
+            width: 100vw;
+            height: 75vh;
+            margin-top: 18vh;
+        }
+        #panel{
+            width: 75%;
+            height: 68vh;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 22vh;
+        }
+        #titlebox{
+            padding-left: 5vw;
+            padding-right: 0vmin;
+            padding-top: 0vh;
+            width: 60vw;
+            height: 25vh;
+            left: 5vw;
+        }
+        #title{
+            position: relative; 
+            z-index: 3; 
+            width: 65vw; 
+            height: 13vh;
+        }
+        #subtitle{
+            position: relative;
+            z-index: 3; 
+            width: 24vw; 
+            height: 4vw;
+            left: 22vw;
+        
+        }
+        #postboxlid{
+            position: absolute;
+            content: url("./ITIJAI-Photo/Sendpostcard/postboxlid3.png"); 
+            z-index: 2;
+            width: 100vw; 
+            height: 42.3vh;
+        }
+        #message{
+            transform: rotate(70deg);
+            position: absolute;
+            left: 21vw; 
+            top: 25vh; 
+            width: 50vw;
+            height: 25vh;
+            z-index: 1;
+            animation: send 6s forwards;
+        }
+    }

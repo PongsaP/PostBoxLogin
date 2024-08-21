@@ -1,0 +1,102 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>navbar</title>
+  </head>
+
+  <style>
+    .navbar {
+      overflow: hidden;
+      background: linear-gradient(180deg, rgb(240, 240, 240)90%, rgba(255,255,255,0) 100%);;
+      position: sticky;
+      top: 0px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      align-items: center;
+    }
+
+    .navbar a {
+      float: right;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 1.5vh;
+      padding-left: 1.3vw;
+      padding-right: 1.3vw;
+      text-decoration: none;
+    }
+
+    .borderLR {
+      width: 0.05vw;
+      height: 2.5vh;
+      background-color: gray;
+    }
+
+    .logonav {
+      position: absolute;
+      height: 3.8vh;
+      left: 1vw;
+      top: 0.8vh;
+
+    }
+
+      /* -----------------underLine animation--------------------- */
+      .underline {
+        position: relative;
+        font-family: 'Oswald', sans-serif;
+      }
+
+      .underline:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 0.175em;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        opacity: .4;
+        transform-origin: bottom center;
+        transition: transform 0.25s ease-out;
+      }
+
+      .underline:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom center;
+      }
+    
+
+/* responsiveeeeeeeeeeeeeee */
+      @media (max-width:480px) {
+    .logonav {
+      position: absolute;
+      height: 6vh;
+      width: auto;
+      left: 1vw;
+      top: 10%;
+      content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บโทรศัพท์_สีดำ.png");
+
+    }
+  }
+  </style>
+
+  <body style="margin: 0; padding: 0">
+    <div class="navbar">
+      <a href="./index.html"><img class="logonav" src="./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บเดสท็อป_สีดำ.png" alt="" /></a>
+      <div class="borderLR borderOut"></div>
+      <a href="./intro.html" class="underline">INTRO</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./tl2.html" class="underline">TIMELINE</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./postcardInfo.html" class="underline">POSTCARD</a>
+    </div>
+    
+  </body>
+</html>

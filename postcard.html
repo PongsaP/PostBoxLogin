@@ -1,0 +1,631 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Kanit:wght@100&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+  <title>POSTCARD</title>
+</head>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  #root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 67px);
+  }
+
+  .navbar {
+    overflow: hidden;
+    background: linear-gradient(180deg,
+        rgb(240, 240, 240) 90%,
+        rgba(255, 255, 255, 0) 100%);
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .navbar a {
+    float: right;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 1.5vh;
+    padding-left: 1.3vw;
+    padding-right: 1.3vw;
+    text-decoration: none;
+  }
+
+  .borderLR {
+    width: 0.05vw;
+    height: 2.5vh;
+    background-color: gray;
+  }
+
+  .logonav {
+    position: absolute;
+    height: 3.8vh;
+    left: 1vw;
+    top: 0.8vh;
+  }
+
+  /* ---------------------------------------- */
+  .underline {
+    position: relative;
+    font-family: "Oswald", sans-serif;
+  }
+
+  .underline:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 0.175em;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.4;
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+  }
+
+  .underline:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+  }
+
+  /* ---------------------------------------------------- */
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      " post  post  sticker "
+      " post  post  sticker "
+      " post  post  sticker "
+      " post  post  text    "
+      " color color text    ";
+  }
+
+  .grid-container>div {
+    text-align: center;
+    justify-content: center;
+    padding: 1vh;
+    font-family: "Chonburi", cursive;
+    font-size: 25px;
+  }
+
+  .contentPostCard {
+    grid-area: post;
+    position: relative;
+  }
+
+  #text1 {
+    position: absolute;
+    left: 22%;
+    top: 72%;
+    width: 220px;
+    height: 4%;
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    font-family: "Chonburi", cursive;
+    font-size: .8em;
+  }
+
+  #text2 {
+    position: absolute;
+    left: 56%;
+    top: 40%;
+    width: 300px;
+    height: 36%;
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    font-family: "Chonburi", cursive;
+    font-size: .8em;
+    resize: none;
+    line-height: 230%;
+  }
+
+
+  /* -------------------------------- */
+  body {
+    padding: 0;
+    margin: 0;
+    background-image: url(./ITIJAI-Photo/Postcard/BG_postcard/BG_postcard.png);
+    background-size: cover;
+    background-position: center;
+  }
+
+  #sticker {
+    position: relative;
+    grid-area: sticker;
+    border-radius: 25px;
+    background: rgba(241, 209, 209, 0.7);
+    width: 20vw;
+    height: 90%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #text {
+    position: relative;
+    grid-area: text;
+    border-radius: 25px;
+    background: rgba(241, 209, 209, 0.7);
+    width: 20vw;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #color {
+    position: relative;
+    grid-area: color;
+    border-radius: 25px;
+    background: rgba(241, 209, 209, 0.7);
+    width: 45vw;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-left: 5.5%;
+  }
+
+  #sticker>img {
+    position: absolute;
+  }
+
+  #text>img {
+    position: absolute;
+  }
+
+  #color>img {
+    position: absolute;
+    cursor: pointer;
+    opacity: 100%;
+  }
+
+  #draggable1 {
+    left: 5%;
+    width: auto;
+    height: 35%;
+  }
+
+  #draggable2 {
+    left: 50%;
+    top: 10%;
+    transform: rotate(15deg);
+    width: auto;
+    height: 20%;
+  }
+
+  #draggable3 {
+    left: 10%;
+    top: 70%;
+    width: auto;
+    height: 25%;
+  }
+
+  #draggable4 {
+    left: 50%;
+    top: 50%;
+    width: auto;
+    height: 25%;
+  }
+
+  #draggable5 {
+    left: 10%;
+    top: 45%;
+    transform: rotate(-25deg);
+    width: auto;
+    height: 25%;
+  }
+
+  #draggable6 {
+    left: 45%;
+    top: 30%;
+    width: auto;
+    height: 25%;
+  }
+
+  #draggable7 {
+    left: 50%;
+    top: 75%;
+    width: auto;
+    height: 20%;
+  }
+
+  #save {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    margin-left: 2em;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    margin-left:85%;
+    line-height: 50px;
+    text-align: right;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-family: "Chonburi", sans-serif;
+  }
+
+  #save:hover {
+    background-color: #fff;
+  }
+
+  #save:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  /* -----------------------responsive360------------------------- */
+
+  @media (max-width:480px) {
+    .logonav {
+      position: absolute;
+      height: 6vh;
+      width: auto;
+      left: 1vw;
+      top: 10%;
+      content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บโทรศัพท์_สีดำ.png");
+
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-areas:
+        " post"
+        " post"
+        " sticker"
+        " text"
+        " color";
+    }
+
+    .grid-container {
+      display: grid;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .contentPostCard {
+      grid-area: post;
+      position: relative;
+      width: 80vw;
+      height: auto;
+      top: -10%;
+    }
+
+    #text1 {
+      position: absolute;
+      left: 22%;
+      top: 70%;
+      width: 220px;
+      height: 4%;
+      background: rgba(255, 255, 255, 0);
+      border: none;
+      font-family: "Chonburi", cursive;
+      font-size: .4em;
+    }
+
+    #text2 {
+      position: absolute;
+      left: 56%;
+      top: 39%;
+      width: 300px;
+      height: 36%;
+      background: rgba(255, 255, 255, 0);
+      border: none;
+      font-family: "Chonburi", cursive;
+      font-size: .4em;
+      resize: none;
+      line-height: 130%;
+    }
+
+    #sticker>p {
+      font-size: .6em;
+    }
+
+    #text>p {
+      font-size: .6em;
+    }
+
+    #color>p {
+      font-size: .6em;
+    }
+
+    #color>img {
+      width: auto;
+      height: 70%;
+      margin-top: 2%;
+    }
+
+    #sticker {
+      position: relative;
+      grid-area: sticker;
+      border-radius: 25px;
+      background: rgba(241, 209, 209, 0.7);
+      width: 72vw;
+      height: 15vh;
+      justify-content: center;
+      text-align: center;
+      margin-left: 5%;
+    }
+
+    #text {
+      position: relative;
+      grid-area: text;
+      border-radius: 25px;
+      background: rgba(241, 209, 209, 0.7);
+      width: 40vh;
+      height: 15vh;
+      justify-content: center;
+      text-align: center;
+      margin-left: 5%;
+      margin-top: 4%;
+    }
+
+    #color {
+      position: relative;
+      grid-area: color;
+      border-radius: 25px;
+      background: rgba(241, 209, 209, 0.7);
+      width: 72vw;
+      height: 10vh;
+      justify-content: center;
+      text-align: center;
+      margin-left: 5%;
+      margin-top: 4%;
+    }
+
+    #save {
+      background-color: #fbeee0;
+      border: 2px solid #422800;
+      border-radius: 30px;
+      box-shadow: #422800 4px 4px 0 0;
+      color: #422800;
+      margin-left: 2em;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 0 18px;
+      margin-left: 20%;
+      line-height: 25px;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      font-family: "Chonburi", sans-serif;
+    }
+
+  #draggable1 {
+    left: 2%;
+    top: 15%;
+    width: auto;
+    height: 55%;
+  }
+
+  #draggable2 {
+    left: 76%;
+    top: 20%;
+    transform: rotate(15deg);
+    width: auto;
+    height: 40%;
+  }
+
+  #draggable3 {
+    left: 12%;
+    top: 50%;
+    width: auto;
+    height: 45%;
+  }
+
+  #draggable4 {
+    left: 65%;
+    top: 50%;
+    width: auto;
+    height: 45%;
+  }
+
+  #draggable5 {
+    left: 30%;
+    top: 20%;
+    transform: rotate(-25deg);
+    width: auto;
+    height: 45%;
+  }
+
+  #draggable6 {
+    left: 50%;
+    top: 30%;
+    width: auto;
+    height: 45%;
+  }
+
+  #draggable7 {
+    left: 40%;
+    top: 55%;
+    width: auto;
+    height: 40%;
+  }
+
+
+
+  }
+</style>
+
+<body>
+  <div class="navbar">
+    <a href="./index.html"><img class="logonav" src="./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บเดสท็อป_สีดำ.png" alt="" /></a>
+    <div class="borderLR borderOut"></div>
+    <a href="./intro.html" class="underline">INTRO</a>
+    <div class="borderLR borderOut"></div>
+    <a href="./tl2.html" class="underline">TIMELINE</a>
+    <div class="borderLR borderOut"></div>
+    <a href="./postcardInfo.html" class="underline">POSTCARD</a>
+  </div>
+
+  <main id="root">
+    <div id="PostCardpage">
+      <div id="grid-container" class="grid-container">
+        <div class="spaceL"></div>
+        <div id="postcard" class="contentPostCard">
+          <img :src="postcardd" style="width:100% ;height:auto;" alt="" />
+          <input name="detail" id="text1" cols="1" rows="1" placeholder="ชื่อ"></input>
+          <textarea name="detail" id="text2" cols="30" rows="5" placeholder="ข้อความ"></textarea>
+        </div>
+
+        <div id="sticker">
+          <p style="margin-top: 0" width="450vw" height="500vh">
+            เลือกสติกเกอร์
+          </p>
+          <img id="draggable1" src="./ITIJAI-Photo/Postcard/Sticker/01สติกเกอร์ตู้.PNG" alt="" />
+          <img id="draggable2" src="./ITIJAI-Photo/Postcard/Sticker/02สติกเกอร์หยักๆ.PNG" alt="" />
+          <img id="draggable3" src="./ITIJAI-Photo/Postcard/Sticker/03สติกเกอร์ตราประทับครั่ง.PNG" alt="" />
+          <img id="draggable4" src="./ITIJAI-Photo/Postcard/Sticker/04สติกเกอร์ที่อยู่.PNG" alt="" />
+          <img id="draggable5" src="./ITIJAI-Photo/Postcard/Sticker/05ถสติกเกอร์เครื่องบินกระดาษ.PNG" alt="" />
+          <img id="draggable6" src="./ITIJAI-Photo/Postcard/Sticker/06สติกเกอร์ตราประทับ.PNG" alt="" />
+          <img id="draggable7" src="./ITIJAI-Photo/Postcard/Sticker/06สติกเกอร์จดหมาย.PNG" alt="" />
+        </div>
+        <div id="text">
+          <p style="margin-top: 0" width="450vw" height="500vh">เลือกข้อความ</p>
+          <img style="left: 5%" width="auto" height="35%" id="draggable8"
+            src="./ITIJAI-Photo/Postcard/Sticker/07ข้อความ.PNG" alt="" />
+          <img style="left: 50%" width="auto" height="35%" id="draggable9"
+            src="./ITIJAI-Photo/Postcard/Sticker/08ข้อความ.PNG" alt="" />
+          <img style="left: 25%; top: 65%" width="auto" height="30%" id="draggable10"
+            src="./ITIJAI-Photo/Postcard/Sticker/09ข้อความ.PNG" alt="" />
+        </div>
+        <div id="color">
+          <p style="text-align: left; margin-left: 4%;" width="450vw" height="500vh">
+            เลือกสี
+          </p>
+          <img style="top: 5%;left: 25%;" width="auto" height="90%"
+            src="./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/ปุ่มสีครีม.png" @click="changeColor('0')" alt="" />
+          <img style="top: 5%;left: 40%;" width="auto" height="90%"
+            src="./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/ปุ่มสีเขียว.png" @click="changeColor('1')" alt="" />
+          <img style="top: 5%;left: 55%;" width="auto" height="90%"
+            src="./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/ปุ่มสีฟ้า.png" @click="changeColor('2')" alt="" />
+          <img style="top: 5%;left: 70%;" width="auto" height="90%"
+            src="./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/ปุ่มสีชมพู.png" @click="changeColor('3')" alt="" />
+        </div>
+      </div>
+      <input type="button" id="save" value=">> ติดแสตมป์" />
+    </div>
+
+  </main>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+  $(function () {
+    $("#draggable1").draggable();
+    $("#draggable2").draggable();
+    $("#draggable3").draggable();
+    $("#draggable4").draggable();
+    $("#draggable5").draggable();
+    $("#draggable6").draggable();
+    $("#draggable7").draggable();
+    $("#draggable8").draggable();
+    $("#draggable9").draggable();
+    $("#draggable10").draggable();
+  });
+
+  $(document).ready(() => {
+    $("#save").on('click', async () => {
+      const root = document.getElementById("root")
+      const container = document.getElementById("grid-container")
+      const postcard = document.getElementById("postcard")
+      const bound = container.getBoundingClientRect()
+
+      const image = new Image()
+      image.src = await domtoimage.toPng(root)
+
+      const canvas = document.createElement("canvas")
+      canvas.width = postcard.clientWidth
+      canvas.height = postcard.clientHeight
+
+      const context = canvas.getContext("2d")
+
+      image.onload = async () => {
+        context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        context.drawImage(image, -bound.left - window.scrollX + 2, -bound.top - window.scrollY + 20, window.innerWidth+10, window.innerHeight+40)
+
+        const imageData = canvas.toDataURL('image/png')
+        window.imageData = imageData
+
+        const data = await fetch("/stamp.html").then(r => r.text())
+
+        // document.documentElement.innerHTML = data
+        document.write(data)
+
+        window.requestAnimationFrame(() => {
+          $(document).ready(() => {
+            document.getElementById("letter").src = imageData
+          })
+        })
+      }
+    })
+  })
+</script>
+<script>
+  var postcard = new Vue({
+    el: "#PostCardpage",
+    data: {
+      postcardd: "./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/หน้าจดหมาย.png",
+      postcardColor: [
+        {
+          id: 1,
+          src: "./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/หน้าจดหมาย.png",
+        },
+        {
+          id: 2,
+          src: "./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/หน้าจดหมายเขียว.png",
+        },
+        {
+          id: 3,
+          src: "./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/หน้าจดหมายฟ้า.png",
+        },
+        {
+          id: 4,
+          src: "./ITIJAI-Photo/Postcard/ปุ่มสีกับโปสการ์ดสี/หน้าจดหมายชมพู.png",
+        }
+      ],
+    },
+    methods: {
+      changeColor: function (color) {
+        this.postcardd = this.postcardColor[color].src;
+      },
+    },
+  });
+</script>
+
+</html>

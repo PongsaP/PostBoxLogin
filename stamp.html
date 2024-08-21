@@ -1,0 +1,549 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chonburi&family=Kanit:wght@100&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+
+    <title>STAMP</title>
+  </head>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #root {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: calc(100vh - 67px);
+    }
+
+    .navbar {
+      overflow: hidden;
+      background: linear-gradient(
+        180deg,
+        rgb(240, 240, 240) 90%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      position: sticky;
+      top: 0px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .navbar a {
+      float: right;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 1.5vh;
+      padding-left: 1.3vw;
+      padding-right: 1.3vw;
+      text-decoration: none;
+    }
+
+    .borderLR {
+      width: 0.05vw;
+      height: 2.5vh;
+      background-color: gray;
+    }
+
+    .logonav {
+      position: absolute;
+      height: 3.8vh;
+      left: 1vw;
+      top: 0.8vh;
+    }
+
+    /* ---------------------------------------- */
+    .underline {
+      position: relative;
+      font-family: "Oswald", sans-serif;
+    }
+
+    .underline:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 0.175em;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+      opacity: 0.4;
+      transform-origin: bottom center;
+      transition: transform 0.25s ease-out;
+    }
+
+    .underline:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom center;
+    }
+    /* ---------------------------------------------------- */
+    .grid-container {
+      display: grid;
+      grid-template-areas:
+        "stamp .     ."
+        "stamp post  post"
+        "stamp post  post"
+        "stamp post  post";
+    }
+
+    .grid-stamp {
+      display: grid;
+      grid-template-areas:
+        "stamp1 stamp2"
+        "stamp3 stamp4"
+        "stamp5 stamp6"
+        "stamp7 stamp8"
+        "stamp9 stamp10";
+    }
+    .grid-stamp > div > img {
+      transform: scale(1.5);
+    }
+    .grid-container > div {
+      text-align: center;
+      justify-content: center;
+      padding: 1vh;
+      font-family: "Chonburi", cursive;
+      font-size: 25px;
+    }
+    .contentPostCard {
+      grid-area: post;
+      position: relative;
+      text-align: center;
+      justify-content: center;
+    }
+    .stamp1 {
+      grid-area: stamp1;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp2 {
+      grid-area: stamp2;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp3 {
+      grid-area: stamp3;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp4 {
+      grid-area: stamp4;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp5 {
+      grid-area: stamp5;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp6 {
+      grid-area: stamp6;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp7 {
+      grid-area: stamp7;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp8 {
+      grid-area: stamp8;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp9 {
+      grid-area: stamp9;
+      position: relative;
+      cursor: pointer;
+    }
+    .stamp10 {
+      grid-area: stamp10;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #text1 {
+      position: absolute;
+      left: 22%;
+      top: 72%;
+      width: 220px;
+      height: 4%;
+      background: rgba(255, 255, 255, 0);
+      border: none;
+      font-family: "Chonburi", cursive;
+      font-size: large;
+      resize: none;
+    }
+    #text2 {
+      position: absolute;
+      left: 56%;
+      top: 40%;
+      width: 300px;
+      height: 35%;
+      background: rgba(255, 255, 255, 0);
+      border: none;
+      font-family: "Chonburi", cursive;
+      font-size: large;
+      resize: none;
+    }
+
+    /* -------------------------------- */
+    .postInfo {
+      text-align: left;
+      padding-left: 5vw;
+    }
+    body {
+      padding: 0;
+      margin: 0;
+      background-image: url(./ITIJAI-Photo/Postcard/BG_postcard/BG_postcard.png);
+      background-size: cover;
+      background-position: center;
+    }
+
+    #stamp {
+      position: relative;
+      grid-area: stamp;
+      border-radius: 25px;
+      background: rgba(241, 209, 209, 0.7);
+      opacity: 80%;
+      width: 20vw;
+      height: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+    #stamp > p {
+      margin-top: 0;
+      font-size: 1em;
+    }
+    #save {
+      background-color: #fbeee0;
+      border: 2px solid #422800;
+      border-radius: 30px;
+      box-shadow: #422800 4px 4px 0 0;
+      color: #422800;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 0 18px;
+      margin-left: 85%;
+      margin-top: 2px;
+      line-height: 50px;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      font-family: "Chonburi", sans-serif;
+    }
+
+    #save:hover {
+      background-color: #fff;
+    }
+
+    #save:active {
+      box-shadow: #422800 2px 2px 0 0;
+      transform: translate(2px, 2px);
+    }
+    .stampp {
+      position: absolute;
+      width: 20%;
+      height: auto;
+      right: 7%;
+      top: 8%;
+    }
+    /* -----------------------responsive360------------------------- */
+
+    @media (max-width: 480px) {
+      .logonav {
+        position: absolute;
+        height: 6vh;
+        width: auto;
+        left: 1vw;
+        top: 10%;
+        content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บโทรศัพท์_สีดำ.png");
+      }
+      #stamp > p {
+        margin-top: 0;
+        font-size: 0.5em;
+      }
+      .grid-container {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-areas:
+          "post"
+          "stamp"
+          "stamp"
+          "stamp";
+      }
+      .grid-stamp {
+        display: grid;
+        grid-template-areas:
+          "stamp1 stamp2 stamp3"
+          "stamp4 stamp5 stamp6"
+          "stamp7 stamp8 stamp9"
+          ". stamp10 .";
+      }
+      #stamp {
+        position: relative;
+        grid-area: stamp;
+        border-radius: 25px;
+        background: rgba(241, 209, 209, 0.7);
+        opacity: 80%;
+        width: 65vw;
+        height: 100%;
+        justify-content: center;
+        text-align: center;
+        margin-left: 17.5%;
+      }
+      #save {
+        background-color: #fbeee0;
+        border: 2px solid #422800;
+        border-radius: 30px;
+        box-shadow: #422800 4px 4px 0 0;
+        color: #422800;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 0 18px;
+        margin-left: 30%;
+        margin-top: 5%;
+        line-height: 25px;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        font-family: "Chonburi", sans-serif;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="navbar">
+      <a href="./index.html"><img class="logonav" src="./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บเดสท็อป_สีดำ.png" alt="" /></a>
+      <div class="borderLR borderOut"></div>
+      <a href="./intro.html" class="underline">INTRO</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./tl2.html" class="underline">TIMELINE</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./postcardInfo.html" class="underline">POSTCARD</a>
+    </div>
+
+    <main id="root">
+      <div id="stampPostcard">
+        <div class="grid-container">
+          <div class="contentPostCard" id="postcardNode">
+            <img
+              id="letter"
+              src="./ITIJAI-Photo/Postcard/หน้าจดหมาย.png"
+              style="width: 100%; height: auto"
+              alt=""
+            />
+            <img class="stampp" v-show="stampPost != ''" :src="stampPost" />
+          </div>
+
+          <div id="stamp">
+            <p>เลือกสแตมป์</p>
+            <div class="grid-stamp">
+              <div class="stamp1">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต2บาท01-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('0')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp2">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต2บาท02-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('1')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp3">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต3บาท01-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('2')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp4">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต3บาท02-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('3')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp5">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต4บาท01-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('4')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp6">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต4บาท02-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('5')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp7">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต5บาท01-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('6')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp8">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต5บาท02-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('7')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp9">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต6บาท01-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('8')"
+                  alt=""
+                />
+              </div>
+              <div class="stamp10">
+                <img
+                  src="./ITIJAI-Photo/Postcard/Stamp/สต6บาท02-01.png"
+                  width="83%"
+                  height="83%"
+                  @click="changeStamp('9')"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input type="button" id="save" value="ส่งโปสการ์ด" onclick="save()" />
+      </div>
+    </main>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-Photo/2.6.0/dom-to-image.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const save = () => {
+      const postcard = document.getElementById("postcardNode");
+      console.log(postcard)
+
+      domtoimage.toBlob(postcard).then(async function (blob) {
+        const data = await fetch("./SendPostcard.html").then((r) => r.text());
+        document.documentElement.innerHTML = data;
+        setTimeout(() => {
+          window.saveAs(blob, "postcard.png")
+        }, 4000);
+      });
+    }
+  </script>
+  <script>
+    var stamp = new Vue({
+      el: "#stampPostcard",
+      data: {
+        stampPost: "",
+        stamp: [
+          {
+            id: 1,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-01.png",
+          },
+          {
+            id: 2,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-02.png",
+          },
+          {
+            id: 3,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-03.png",
+          },
+          {
+            id: 4,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-04.png",
+          },
+          {
+            id: 5,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-05.png",
+          },
+          {
+            id: 6,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-06.png",
+          },
+          {
+            id: 7,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-07.png",
+          },
+          {
+            id: 8,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-08.png",
+          },
+          {
+            id: 9,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-09.png",
+          },
+          {
+            id: 10,
+            src: "./ITIJAI-Photo/Postcard/Stamp/stamp+ background/stamp-10.png",
+          },
+        ],
+      },
+      methods: {
+        changeStamp: function (stampnum) {
+          this.stampPost = this.stamp[stampnum].src;
+        },
+      },
+    });
+  </script>
+</html>

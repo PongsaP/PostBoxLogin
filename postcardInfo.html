@@ -1,0 +1,414 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Kanit:wght@100&display=swap" rel="stylesheet" />
+  <title>postInfo</title>
+</head>
+
+<style>
+  @import url('https://fonts.cdnfonts.com/css/southland');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap');
+
+  #root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .navbar {
+    overflow: hidden;
+    background: linear-gradient(180deg, rgb(240, 240, 240)90%, rgba(255, 255, 255, 0) 100%);
+    ;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .navbar a {
+    float: right;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 1.5vh;
+    padding-left: 1.3vw;
+    padding-right: 1.3vw;
+    text-decoration: none;
+  }
+
+  .borderLR {
+    width: 0.05vw;
+    height: 2.5vh;
+    background-color: gray;
+  }
+
+  .logonav {
+    position: absolute;
+    height: 3.8vh;
+    left: 1vw;
+    top: 15%;
+    content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บเดสท็อป_สีดำ.png");
+
+  }
+
+  .postcardheader {
+    width: 55%;
+    height: auto;
+    transform: translateX(-20%);
+  }
+
+  /* -----------------underLine animation--------------------- */
+  .underline {
+    position: relative;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .underline:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 0.175em;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    opacity: .4;
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+  }
+
+  .underline:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+  }
+
+  /* ---------------------------------------------------- */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 3fr 8fr 6fr 3fr;
+    padding-top: 5vh;
+  }
+
+  .grid-container>div {
+    text-align: center;
+    justify-content: center;
+    padding: 1vh;
+    font-size: 30px;
+  }
+
+  .contentPostCard {
+    grid-row: 1 / 4;
+  }
+
+  .spaceL {
+    grid-row: 1 / 4;
+    grid-column: 1 / 2;
+  }
+
+  .spaceR {
+    grid-row: 1 / 4;
+    grid-column: 4;
+  }
+
+  .spaceR>div {
+    transform: translateX(-25%);
+  }
+
+  /* -------------------------------- */
+  .postInfo {
+    text-align: left;
+    padding-left: 5vw;
+  }
+
+  #header {
+    text-indent: 1vw;
+    font-weight: 600;
+    font-family: 'Taviraj', serif;
+    margin-top: 0;
+    font-size: 1em;
+  }
+
+  #contentInfo {
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-weight: 600;
+    font-size: .7em
+  }
+
+  .instruc {
+    position: relative;
+  }
+
+  .frame {
+    position: relative;
+    width: 20vw;
+    height: 25vh;
+  }
+
+  .compo {
+    position: absolute;
+    left: 25%;
+    top: 10%;
+  }
+
+  .dot {
+    position: absolute;
+    width: 60;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1em;
+    background: #000;
+    top: 7vh;
+    left: 13%;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+
+  }
+
+  .dot p {
+    margin-top: 10%;
+
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    background: url(./ITIJAI-Photo/Postcard/BG_postcard/BG_ขั้นตอนการทำpostcard.jpg);
+  }
+
+  /* ---------------------button---------------------- */
+
+  #save {
+    background-color: #f1f1f1;
+    border: 2px solid dimgray;
+    border-radius: 30px;
+    box-shadow: dimgray 4px 4px 0 0;
+    color: rgb(85, 85, 85);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    margin-top: 35vh;
+    line-height: 50px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-family: "Chonburi", sans-serif;
+  }
+
+  #save:hover {
+    background-color: #fff;
+  }
+
+  #save:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+
+  /* -----------------------responsive360------------------------- */
+
+  @media (max-width:480px) {
+    .grid-container {
+      display: inline-block;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .grid-container>div {
+      text-align: center;
+      justify-content: center;
+      padding: 1vh;
+    }
+
+    .logonav {
+      position: absolute;
+      height: 6vh;
+      width: auto;
+      left: 1vw;
+      top: 10%;
+      content: url("./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บโทรศัพท์_สีดำ.png");
+
+    }
+
+    .contentPostCard {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .postcardheader {
+      width: 70%;
+      height: auto;
+      transform: translateX(5%);
+    }
+
+    .postInfo {
+      text-align: center;
+    }
+
+    #header {
+      text-indent: 1vw;
+      font-weight: 600;
+      font-family: 'Taviraj', serif;
+      margin-top: 0;
+      font-size: .7em;
+    }
+
+    #contentInfo {
+      font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+      font-weight: 600;
+      font-size: .45em;
+      text-align: left;
+    }
+
+    .instruc {
+      position: relative;
+    }
+
+    .frame {
+      position: relative;
+      width: auto;
+      height: 25vh;
+    }
+
+    .compo {
+      position: absolute;
+      left: 25%;
+      top: 12%;
+      height: 20vh;
+      width: auto;
+    }
+
+    .dot {
+      position: absolute;
+      width: 60;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 1em;
+      background: #000;
+      top: 7vh;
+      left: 10%;
+      color: white;
+      font-family: 'Oswald', sans-serif;
+
+    }
+
+    .dot p {
+      margin-top: 10%;
+
+    }
+    .spaceR {
+    text-align: center;
+    justify-content: center;
+  }
+  #save {
+    background-color: #f1f1f1;
+    border: 2px solid dimgray;
+    border-radius: 30px;
+    box-shadow: dimgray 4px 4px 0 0;
+    color: rgb(85, 85, 85);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    margin-top: 5vh;
+    line-height: 50px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-family: "Chonburi", sans-serif;
+  }
+
+
+
+  }
+</style>
+
+<body>
+
+  <body style="margin: 0; padding: 0">
+
+    <div class="navbar">
+      <a href="./index.html"><img class="logonav" src="./ITIJAI-Photo/ชื่อเว็บอันใหม่/ชื่อเว็บเดสท็อป_สีดำ.png" alt="" /></a>
+      <div class="borderLR borderOut"></div>
+      <a href="./intro.html" class="underline">INTRO</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./tl2.html" class="underline">TIMELINE</a>
+      <div class="borderLR borderOut"></div>
+      <a href="./postcardInfo.html" class="underline">POSTCARD</a>
+    </div>
+    <main id="root">
+      <div class="grid-container">
+        <div class="spaceL"></div>
+        <div class="contentPostCard">
+          <!-- <h1 class="postInfo"
+            style="font-family: 'Southland', sans-serif;font-weight: 300;font-size: 1em;margin: 0;padding-left: 43%; transform: scale(5);">
+            Postcards</h1> -->
+          <img src="./ITIJAI-Photo/Postcard/postcards-01.png" class="postcardheader" alt="">
+          <h2 class="postInfo" id="header">
+            มาเริ่มทำโปสการ์ดกันเถอะ!</h2>
+          <p class="postInfo" id="contentinfo">
+            ไปรษณียบัตร ณ <br />
+            สยามประเทศถือกำเนิดขึ้นปลายรัชกาลที่ 5 <br />
+            ผู้กำเนิดคือ Robert Lenz <br />
+            ชาวเยอรมันหัวดีที่พิมพ์โปสการ์ดออกมาขาย
+          </p>
+          <br />
+          <p class="postInfo" id="contentinfo"">
+            ไปรษณียบัตร ขนาดมาตรฐาน คือ 4 x 6 นิ้ว <br />
+            ด้านหนึ่งของแผ่นกระดาษเป็นรูปภาพ หรือ <br />
+            ภาพถ่ายที่มีหรือไม่มีข้อความหรือคำอธิบาย <br />
+            อีกด้านหนึ่งแบ่งออกเป็น 2 ส่วน คือส่วนสำหรับให้ผู้ส่ง<br />
+            กรอกชื่อและที่อยู่ของผู้รับ และ <br />
+            ส่วนที่เป็นพื้นที่สำหรับใส่ข้อความสั้นๆ
+          </p>
+        </div>
+        <div class=" instruc">
+          <div class="dot">
+            <p>1</p>
+          </div>
+          <img class="frame" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/framePost.png" alt="" />
+          <img class="compo" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/post1.png" alt="" width="300vw"
+            height="200vh" />
+        </div>
+        <div class="instruc">
+          <div class="dot">
+            <p>2</p>
+          </div>
+          <img class="frame" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/framePost.png" alt=""
+            style="transform: scaleY(-1);" />
+          <img class="compo" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/post2.png" alt="" width="300vw"
+            height="200vh" />
+        </div>
+        <div class="instruc">
+          <div class="dot">
+            <p>3</p>
+          </div>
+          <img class="frame" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/framePost.png" alt="" />
+          <img class="compo" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/post3_1.PNG" alt="" width="180vw"
+            height="180vh" style="top:16%" />
+          <img class="compo" src="./ITIJAI-Photo/Postcard/ขั้นตอนการทำPostcard/post3_2.png" alt="" width="120vw"
+            height="120vh" style="left:50% ; top:20% ;" />
+        </div>
+        <div class="spaceR">
+          <a href="./postcard.html"><input type="button" id="save" value="ทำโปสการ์ด" /></a>
+        </div>
+      </div>
+    </main>
+  </body>
+
+</html>

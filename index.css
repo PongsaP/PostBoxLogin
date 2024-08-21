@@ -1,0 +1,365 @@
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    }
+    #background{
+        position: absolute; 
+        width: 100vw; 
+        height: 100vh; 
+        z-index: 0;
+    }
+    .container{
+        max-width: 1920px;
+    }
+    #postbox{
+        position: absolute; 
+        width: 100vw; 
+        height: 100vh; 
+        z-index: 1;
+    }
+    #stamp1{
+        position: absolute;
+        z-index: 1;  
+        width: 30vh; 
+        height: 30vh; 
+        top: 15vh; 
+        right: 18vh;
+        animation: flickleft 2.5s infinite linear;
+    }
+    #stamp2{
+        position: absolute;
+        z-index: 1;
+        width: 23vh; 
+        height: 11vh; 
+        bottom: 0vw; 
+        right: 40vh;
+        animation: moving 3s infinite linear;
+    }
+    #stamp3{
+        position: absolute;
+        z-index: 1; 
+        width: 27vh; 
+        height: 30vh; 
+        top: 28vw; 
+        left: 22vh;
+        animation: flickright 4s infinite linear;
+    }
+    #stamp4{
+        position: absolute; 
+        z-index: 1; 
+        width: 12vw; 
+        height: 30vh;  
+        right: 19vw;
+        top: 6vh;
+        animation: moving2 2s infinite linear;
+    }
+    @keyframes flickright{
+        25%{
+            transform: rotate(20deg);
+        }
+        50%{
+            transform: rotate(0deg);
+        }
+        75%{
+            transform: rotate(-20deg)
+        }
+        100%{
+            transform: rotate(0deg);
+        }   
+    }
+    @keyframes flickleft{
+        25%{
+            transform: rotate(-30deg);
+        }
+        50%{
+            transform: rotate(-60deg);
+        }
+        75%{
+            transform: rotate(-30deg)
+        }
+        100%{
+            transform: rotate(0deg);
+        }
+    }
+    @keyframes moving{
+        25%{
+            transform: translate(-3vw);
+        }
+        50%{
+            transform: translate(-6vw);
+        }
+        75%{
+            transform: translate(-3vw);
+        }
+        100%{
+            transform: translate(0vw,);
+        }   
+    }
+    @keyframes moving2{
+        25%{
+            transform: translate(0vw,2vh);
+        }
+        50%{
+            transform: translate(0vw,4vh);
+        }
+        75%{
+            transform: translate(0vw,2vh);
+        }
+        100%{
+            transform: translate(0vw,0vh);
+        }   
+    }
+
+    #mail{
+        position: absolute; 
+        z-index: 3; 
+        width: 25vw; 
+        height: 23vh;
+        left: 40vw;
+        top: 44vh;
+        transition: 1.25s;
+    }
+    #gotext{
+        position: absolute;
+        z-index: 4; 
+        width: 6vw; 
+        height: 7vh; 
+        left: 53vw;
+        top: 55vh;
+        transition: 1.25s;
+    }
+    #mail:hover{
+        cursor: pointer;
+        transform: translate(0vw,-4vh);
+        transition: 1.25s;
+    }
+    #mail:hover + #gotext{
+        transform: translate(0vw,-4vh);
+        transition: 1.25s;
+    }
+    #panel{
+        width: 50%;
+        height: 50vh;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1;
+        position: relative;
+    }
+    #postboxlid{
+        position: absolute; 
+        z-index: 4; 
+        width: 39.9vw; 
+        height: 8vh;  
+        left: 30.25vw;
+        top: 40vh;
+    }
+    #block1{
+        position: absolute; 
+        z-index: 4;
+        width: 25vw;
+        height: 18vh;
+        top: 55vh;
+        left: 35vw;
+        rotate: 25.5deg;
+    }
+    #block2{
+        position: absolute; 
+        z-index: 4;
+        width: 12.5vw;
+        height: 10vh;
+        top: 52vh;
+        left: 59.6vw;
+        rotate: -69deg;
+    }
+    #titlebox{
+        margin-left: 10vmin;
+        margin-right: 10vmin;
+        margin-top: 15vmin; 
+        width: 40vw;
+        height: 15vh;
+    }
+    #subtitlebox{
+        color: white;
+        margin-left: 12.5vmin;
+        margin-right: 12.5vmin;
+        text-align: center;
+        font-size: 2.5vh;
+    }
+    #postcardbox{
+        height: 10.3vh;
+        width: 37vw;
+        left: 31.75vw;
+        top: 47vh;
+        z-index: 2;
+        position: absolute;
+        transition: 2s;
+        background-color: none;
+    }
+    #mail:hover ~ #postcardbox{
+        box-shadow: 0 0 8px 8px gold inset;
+        background: linear-gradient(black, 40%, gold);
+        opacity: 50%;
+    }
+    #optionbox{
+        position: absolute;
+        width: 40vw;
+        height: 10vh;
+        top: 73vh;
+        left: 30.5vw;
+        z-index: 5;
+    }
+    .options{
+        height: 10vh;
+        display: inline-block;
+        width: 12.5vw;
+        transition: 1.25s;
+    }
+    .options:hover{
+        background-color: orange;
+        transition: 1.25s;
+        cursor: pointer;
+    }
+    #icon1{
+        display: inline-block; 
+        margin-top: 3.5vh; 
+        margin-left: 5vh;
+        width: 2vw;
+        height: 2vw;
+    }
+    #icon2{
+        display: inline-block; 
+        margin-top: 3.5vh; 
+        margin-left: 2vh;
+        width: 2vw;
+        height: 2vw;
+    }
+    #icon3{
+        display: inline-block; 
+        margin-top: 3.5vh; 
+        margin-left: 3vh;
+        width: 2vw;
+        height: 2vw;
+    }
+    #option{
+        display: inline-block; 
+        margin-left: 1vh;
+        height: 3.1vh;
+    }
+    @media (max-width:480px){
+        #background{
+            content: url("./ITIJAI-Photo/Homepage/home page-01 2.png");
+            position: absolute; 
+            width: 100vw; 
+            height: 100vh; 
+            z-index: 0;
+        }
+        #mail{
+            position: absolute; 
+            z-index: 3; 
+            width: 50vw; 
+            height: 15vh;
+            left: 25vw;
+            top: 50.75vh;
+            transition: 1.25s;
+        }
+        #mail:hover{
+            cursor: pointer;
+            transform: translate(0vw,-2.75vh);
+            transition: 1.25s;
+        }
+        #mail:hover + #gotext{
+            transform: translate(0vw,-2.75vh);
+            transition: 1.25s;
+        }
+        #gotext{
+            position: absolute;
+            z-index: 4; 
+            width: 12vw; 
+            height: 4.5vh; 
+            left: 51vw;
+            top: 57.5vh;
+            transition: 1.25s;
+        }
+        #postboxlid{
+            position: absolute; 
+            z-index: 4; 
+            width: 65vw; 
+            height: 4vh;  
+            left: 17vw;
+            top: 49.5vh;
+        }
+        #block1{
+            position: absolute; 
+            z-index: 4;
+            width: 45vw;
+            height: 10vh;
+            top: 58.5vh;
+            left: 20vw;
+            rotate: 25deg;
+        }
+        #block2{
+            position: absolute; 
+            z-index: 4;
+            width: 10vw;
+            height: 15vh;
+            top: 52vh;
+            left: 70.4vw;
+            rotate: 20deg;
+        }
+        #panel{
+            width: 100vw;
+            height: 93.5vh;
+            z-index: 1;
+            position: absolute;
+        }
+        #postcardbox{
+            height: 6.2vh;
+            width: 61vw;
+            top: 52vh;
+            left: 19vw;
+            z-index: 2;
+            position: relative;
+        }
+        #optionbox{
+            height: 30vh;
+            top: 65vh;
+            width: 45vw;
+            left: 25vw;
+            position: absolute;
+        }
+        .options{
+            display: block;
+            width: 30vw;
+            height: 6vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 3vh;
+            transition: 1.25s;
+        }
+        #icon1{
+            margin-top: 2.5vh; 
+            margin-left: 7vw;
+            width: 3vw;
+            height: 3vw;
+        }
+        #icon2{
+            margin-top: 2.5vh; 
+            margin-left: 4vw;
+            width: 3vw;
+            height: 3vw;
+        }
+        #icon3{
+            margin-top: 2.5vh; 
+            margin-left: 5vw;
+            width: 3vw;
+            height: 3vw;
+        }
+        #option{
+            margin-left: 1vh;
+            height: 2vh;
+        }
+        #postbox, #titlebox, #subtitlebox, #stamp1, #stamp2, #stamp3, #stamp4{
+            display:none;
+        }
+    }
